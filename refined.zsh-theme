@@ -19,6 +19,7 @@
 #   Twitter:  https://twitter.com/nicoulaj
 #
 # ------------------------------------------------------------------------------
+# Slightly modified by apoullet
 
 # Set required options
 #
