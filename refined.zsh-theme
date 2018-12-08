@@ -33,8 +33,8 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable hg bzr git
 zstyle ':vcs_info:*:*' unstagedstr '!'
 zstyle ':vcs_info:*:*' stagedstr '+'
-zstyle ':vcs_info:*:*' formats "$FX[bold]%r$FX[no-bold]/%S" "%s/%b" "%%u%c"
-zstyle ':vcs_info:*:*' actionformats "$FX[bold]%r$FX[no-bold]/%S" "%s/%b" "%u%c (%a)"
+zstyle ':vcs_info:*:*' formats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}$FX[bold]%r$FX[no-bold]/%S%F{red}]" "%s/%b" "%%u%c"
+zstyle ':vcs_info:*:*' actionformats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}$FX[bold]%r$FX[no-bold]/%S%F{red}]" "%s/%b" "%u%c (%a)"
 zstyle ':vcs_info:*:*' nvcsformats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}%1~%F{red}]" "" ""
 
 # Fastest possible way to check if repo is dirty
