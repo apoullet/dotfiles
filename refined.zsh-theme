@@ -34,9 +34,9 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable hg bzr git
 zstyle ':vcs_info:*:*' unstagedstr '!'
 zstyle ':vcs_info:*:*' stagedstr '+'
-zstyle ':vcs_info:*:*' formats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}$FX[bold]%r$FX[no-bold]/%S%F{red}]" "%s/%b" "%%u%c"
-zstyle ':vcs_info:*:*' actionformats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}$FX[bold]%r$FX[no-bold]/%S%F{red}]" "%s/%b" "%u%c (%a)"
-zstyle ':vcs_info:*:*' nvcsformats "%F{red}[%F{yellow}%n %F{green}@ %F{blue}%1~%F{red}]" "" ""
+zstyle ':vcs_info:*:*' formats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%%u%c"
+zstyle ':vcs_info:*:*' actionformats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%u%c (%a)"
+zstyle ':vcs_info:*:*' nvcsformats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}%1~%F{1}]" "" ""
 
 # Fastest possible way to check if repo is dirty
 #
@@ -77,13 +77,13 @@ precmd() {
 
 # Define prompts
 #
-PROMPT="%(?.%F{magenta}.%F{red})$%f " # Display a red prompt char on failure
+PROMPT="%(?.%F{200}.%F{red})$%f " # Display a red prompt char on failure
 
 if type "virtualenv_prompt_info" > /dev/null
 then
-	RPROMPT='%F{8}$(virtualenv_prompt_info)%f %F{8}${SSH_TTY:+%n@%m}%f'
+	RPROMPT='%F{200}$(virtualenv_prompt_info)%f %F{200}${SSH_TTY:+%n@%m}%f'
 else
-	RPROMPT='%F{8}${SSH_TTY:+%n@%m}%f'
+	RPROMPT='%F{200}${SSH_TTY:+%n@%m}%f'
 fi
 
 # ------------------------------------------------------------------------------
