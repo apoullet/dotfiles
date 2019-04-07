@@ -1,5 +1,5 @@
 *.scrollBar: false
-*.font: xft:Px437 IBM VGA9:size=16
+*.font: xft:Px437 IBM VGA8:size=14
 
 /* SPECIAL COLOURS */
 *.foreground: #FCE8C3
