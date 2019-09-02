@@ -204,7 +204,7 @@ call s:HL('SrceryXgray5', s:xgray5)
 " Normal text
 "
 if g:srcery_transparent_background == 1 && !has('gui_running')
-  call s:HL('Normal', s:bright_white, s:none)
+  call s:HL('Normal', s:none, s:none)
  else
   call s:HL('Normal', s:bright_white, s:black)
 endif
@@ -963,5 +963,3 @@ call s:HL('shParenError', s:bright_white, s:bright_red)
 " }}}
 
 " vim: set sw=2 ts=2 sts=2 et tw=80 ft=vim fdm=marker :
-
-hi Normal ctermbg=NONE ctermfg=NONE

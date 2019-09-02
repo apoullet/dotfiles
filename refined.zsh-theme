@@ -34,9 +34,9 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable hg bzr git
 zstyle ':vcs_info:*:*' unstagedstr '!'
 zstyle ':vcs_info:*:*' stagedstr '+'
-zstyle ':vcs_info:*:*' formats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%%u%c"
-zstyle ':vcs_info:*:*' actionformats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%u%c (%a)"
-zstyle ':vcs_info:*:*' nvcsformats "%F{1}[%F{208}%n%F{11}@%F{82}%M %F{75}%1~%F{1}]" "" ""
+zstyle ':vcs_info:*:*' formats "%F{1}[%F{208}%n%F{226}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%%u%c"
+zstyle ':vcs_info:*:*' actionformats "%F{1}[%F{208}%n%F{226}@%F{82}%M %F{75}$FX[bold]%r$FX[no-bold]/%S%F{1}]" "%F{250}%s/%b" "%u%c (%a)"
+zstyle ':vcs_info:*:*' nvcsformats "%F{1}[%F{208}%n%F{226}@%F{82}%M %F{75}%1~%F{1}]" "" ""
 
 # Fastest possible way to check if repo is dirty
 #
