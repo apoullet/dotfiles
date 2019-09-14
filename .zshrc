@@ -11,7 +11,7 @@ export ZSH="/home/antoine/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="refined"
+ZSH_THEME="amuse"
 
 export TERM=xterm-kitty
 
@@ -102,34 +102,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# Taskwarrior 
-alias task="taskwarrior/src/task"
-alias tl="task list"
-
-
-PATH=~/.cargo/bin:$PATH
-PATH=~/dev/scripts:$PATH
-
 export MYVIMRC="$HOME/.config/nvim/init.vim"
+export EDITOR="nvim"
 
 alias nrc="nvim $MYVIMRC"
 alias zrc="nvim $HOME/.zshrc"
 alias szrc="source $HOME/.zshrc"
 alias krc="nvim $HOME/.config/kitty/kitty.conf"
-alias i3c="nvim $HOME/.config/i3/config"
-alias polyc="nvim $HOME/.config/polybar/config"
-alias texit="tmux kill-session"
-
-# function zle-line-init zle-keymap-select {
-#     if [ -n "$TMUX" ]; then
-# 	alias nvim='TERM="tmux" nvim'
-#     else
-# 	alias nvim='TERM="xterm" nvim'
-#     fi
-# }
-
-# zle -N zle-line-init
-# zle -N zle-keymap-select
 
 bindkey -v
 
@@ -139,6 +118,5 @@ export KEYTIMEOUT=1
 
 export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
 
+export DIRENV_LOG_FORMAT=
 eval "$(direnv hook zsh)"
-
-tl
