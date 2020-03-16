@@ -10,11 +10,11 @@ get_info() {
     else
       color=82
     fi
-    
-    echo "%F{$color}%n%F{226}@%F{$color}%M %F{75}%1~%{$reset_color%}$(git_prompt_info) | %F{white}%D{%f/%m/%y} %D{%L:%M}%{$reset_color%}"
+
+    echo "%F{64}[%{$reset_color%}%F{64}%n%F{64}@%F{64}%M%F{64}:%F{64}%1~%{$reset_color%}$(git_prompt_info)%F{64}]%{$reset_color%}"
 }
 
-PROMPT=$'\n%{$(get_info)%}\n%(?.%F{200}.%F{red})λ%f '
+PROMPT=$'$(get_info)%(?.%F{64}.%F{red})$%f '
 
 if type "virtualenv_prompt_info" > /dev/null
 then

@@ -13,7 +13,7 @@ export ZSH="/home/antoine/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="amuse"
 
-export TERM=xterm-kitty
+export TERM=xterm-256color
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -104,19 +104,23 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export MYVIMRC="$HOME/.config/nvim/init.vim"
 export EDITOR="nvim"
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig"
 
 alias nrc="nvim $MYVIMRC"
 alias zrc="nvim $HOME/.zshrc"
 alias szrc="source $HOME/.zshrc"
-alias krc="nvim $HOME/.config/kitty/kitty.conf"
+alias dsw="rm /home/antoine/.local/share/nvim/swap/*"
 
 bindkey -v
-
 export KEYTIMEOUT=1
+
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+bindkey -s '^j' 'fg^M'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
-
-export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh)"
