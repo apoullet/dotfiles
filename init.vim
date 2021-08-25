@@ -26,12 +26,13 @@ Plug 'itchyny/lightline.vim'
 
 Plug 'ervandew/supertab'
 
+Plug 'tomasiser/vim-code-dark'
+
 call plug#end()
 
-color delek
+color codedark
 
 set bg=dark
-set relativenumber
 set guicursor=a:block
 set nonumber
 set nohlsearch incsearch
@@ -42,10 +43,10 @@ set hidden
 
 let mapleader = " "
 
+imap kj <Esc>
 nmap <leader>q :q<CR>
 nmap <leader>w :w<CR>
 nmap <leader>x :x<CR>
-nmap <leader>g mqgg=G`qzz
 
 nmap <leader>e :Files<CR>
 nmap <leader>r :e<Space>
@@ -78,5 +79,4 @@ let g:lightline = {
 	    \ 'component_function': {
 	    \   'gitbranch': 'fugitive#head'
 	    \ },
-            \ 'colorscheme': 'srcery_drk',
 	    \ }
