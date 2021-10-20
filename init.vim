@@ -24,16 +24,12 @@ Plug 'airblade/vim-rooter'
 
 Plug 'itchyny/lightline.vim'
 
-Plug 'ervandew/supertab'
-
-Plug 'tomasiser/vim-code-dark'
-
 call plug#end()
 
-color codedark
-
 set bg=dark
+
 set guicursor=a:block
+set guicursor+=a:blinkon0
 set nonumber
 set nohlsearch incsearch
 set splitbelow splitright
@@ -51,25 +47,10 @@ nmap <leader>x :x<CR>
 nmap <leader>e :Files<CR>
 nmap <leader>r :e<Space>
 nmap <leader>f :Rg<CR>
-nnoremap <silent> <leader>s :call fzf#run({
-	    \   'down': '40%',
-	    \   'sink': 'botright split' })<CR>
-nmap <C-s> <C-w>s
 
 nmap <leader>b :Buffers<CR>
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprevious<CR>
-
-nmap <leader>p :Gstatus<CR>
-nmap <leader>d :Gdiff<CR>
-
-nmap <leader>c :w !xclip -i -sel c<CR><CR>
-
-nmap <silent> <leader><leader> <C-z>
-
-nnoremap n nzz
-
-let g:SuperTabNoCompleteAfter = ['^', '\s', '\\', '\*']
 
 let g:lightline = {
 	    \ 'active': {
