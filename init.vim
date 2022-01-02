@@ -32,11 +32,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'sheerun/vim-polyglot'
 
+Plug 'drewtempelmeyer/palenight.vim'
+
 call plug#end()
 
 set termguicolors
 set bg=dark
-color alduin
+color palenight
 
 set guicursor=a:block-blinkon0
 set guicursor+=i-r:hor20
@@ -50,6 +52,9 @@ let mapleader = " "
 
 imap kj <Esc>
 vmap kj <Esc>
+
+" Binding to make it easier to apply macros to multiple lines
+cmap N norm!<Space>@
 
 " Move highlight code block
 vnoremap J :m '>+1<CR>gv=gv
@@ -91,7 +96,7 @@ let g:lightline = {
 	    \   'left': [ [ 'mode', 'paste' ],
 	    \             [ 'readonly', 'filename', 'modified', 'gitbranch' ] ]
 	    \ },
-        \ 'colorscheme': 'PaperColor',
+        \ 'colorscheme': 'palenight',
 	    \ 'component_function': {
 	    \   'gitbranch': 'fugitive#head'
 	    \ },
