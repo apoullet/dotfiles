@@ -55,7 +55,13 @@ local servers = {
   -- clangd = {},
   gopls = {},
   pyright = {},
-  rust_analyzer = {},
+  rust_analyzer = {
+    diagnostics = {
+      experimental = {
+        enable = true
+      }
+    }
+  },
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -66,6 +72,9 @@ local servers = {
     },
   },
 }
+
+-- Setup neovim lua configuration
+require('neodev').setup()
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -140,7 +149,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return
     end
 
-    -- Create an autocmd that will run *before* we save the buffer.
+    -- Create an autocmd that will run *before* we save the buffer. 'BufWritePre'
     --  Run the formatting command for the LSP that has just attached.
     vim.api.nvim_create_autocmd('BufWritePre', {
       group = get_augroup(client),

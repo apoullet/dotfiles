@@ -14,4 +14,3 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup('custom.plugins')
-require('neodev').setup()
