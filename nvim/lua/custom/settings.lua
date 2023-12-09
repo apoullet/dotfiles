@@ -40,16 +40,15 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
 -- Change cursor behavior in different modes
 vim.o.guicursor = 'a:block-blinkon0,i-r:hor20'
+
+-- Sane splitting behaviour
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+-- Tabbing behaviour
+vim.o.tabstop = 8
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
