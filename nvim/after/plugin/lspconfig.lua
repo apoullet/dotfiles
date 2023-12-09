@@ -1,6 +1,6 @@
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
     -- NOTE: Remember that lua is a real programming language, and as such it is possible
     -- to define small helper and utility functions so you don't have to repeat yourself
     -- many times.
@@ -52,19 +52,8 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-    -- clangd = {},
-    gopls = {},
     pyright = {},
-    rust_analyzer = {
-        diagnostics = {
-            experimental = {
-                enable = true
-            }
-        }
-    },
-    -- tsserver = {},
-    -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
+    rust_analyzer = {},
     lua_ls = {
         Lua = {
             workspace = { checkThirdParty = false },
@@ -96,13 +85,6 @@ mason_lspconfig.setup_handlers {
             filetypes = (servers[server_name] or {}).filetypes,
         }
     end
-}
-
-require('lspconfig').glslls.setup {}
-
-require('lspconfig')['hls'].setup {
-    filetypes = { 'haskell', 'lhaskell', 'cabal' },
-    cmd = { "haskell-language-server-9.2.8~2.0.0.1", "--lsp" },
 }
 
 -- Switch for controlling whether you want autoformatting.
@@ -143,7 +125,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             return
         end
 
-        -- Tsserver usually works poorly. Sorry you work with bad languages
+        -- tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
         if client.name == 'tsserver' then
             return
