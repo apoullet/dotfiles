@@ -53,3 +53,7 @@ vim.o.smartindent = true
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
+
+-- Show EOL char
+vim.o.list = true
+vim.o.listchars = 'eol:⮐'

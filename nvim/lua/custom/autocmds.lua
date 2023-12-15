@@ -16,5 +16,5 @@ vim.api.nvim_create_autocmd('TermOpen', {
 })
 
 vim.api.nvim_create_autocmd('TermOpen', {
-    command = 'set listchars= nonumber norelativenumber nocursorline'
+    command = 'setlocal listchars= nonumber norelativenumber nocursorline'
 })
