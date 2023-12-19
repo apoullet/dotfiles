@@ -1,4 +1,4 @@
-require("custom")
+require("custom.keymaps")
 
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -13,4 +13,20 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup('custom.plugins')
+require('lazy').setup('custom.plugins', {
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "netrwPlugin",
+                "gzip",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+                "spellfile"
+            }
+        }
+    }
+})
+
+require("custom")

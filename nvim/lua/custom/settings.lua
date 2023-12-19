@@ -1,6 +1,10 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Color theme
+vim.o.background = 'dark'
+vim.cmd.colorscheme('rose-pine')
+
 -- Set highlight on search
 vim.o.hlsearch = false
 vim.o.incsearch = true

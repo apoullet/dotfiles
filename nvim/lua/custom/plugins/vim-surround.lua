@@ -1,8 +1,12 @@
 return {
     {
-        'tpope/vim-surround'
+        'tpope/vim-surround',
+        keys = {
+            "cs",
+            "ds"
+        },
+        dependencies = {
+            'tpope/vim-repeat',
+        }
     },
-    {
-        'tpope/vim-repeat'
-    }
 }

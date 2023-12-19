@@ -1,7 +1,9 @@
 return {
-    -- "gc" to comment visual regions/lines
     {
         'numToStr/Comment.nvim',
-        opts = {}
+        keys = {
+            { "gc" },
+            { "gc", mode = "v" }
+        },
     },
 }
