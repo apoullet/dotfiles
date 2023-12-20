@@ -85,7 +85,7 @@ return {
         event = "VeryLazy",
         config = function()
             require('treesitter-context').setup {
-                mode = 'topline',
+                mode = 'cursor',
                 max_lines = 3
             }
         end
