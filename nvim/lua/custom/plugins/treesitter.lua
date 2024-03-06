@@ -15,6 +15,7 @@ return {
                 'python',
                 'vimdoc',
                 'vim',
+                'zig'
             },
 
             -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -80,14 +81,4 @@ return {
             require('nvim-treesitter.configs').setup(opts)
         end
     },
-    {
-        'nvim-treesitter/nvim-treesitter-context',
-        event = "VeryLazy",
-        config = function()
-            require('treesitter-context').setup {
-                mode = 'cursor',
-                max_lines = 3
-            }
-        end
-    }
 }

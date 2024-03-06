@@ -1,9 +1,9 @@
 return {
-    {
-        'numToStr/Comment.nvim',
-        keys = {
-            { "gc" },
-            { "gc", mode = "v" }
-        },
-    },
+	{
+		'tpope/vim-commentary',
+		keys = {
+			{ "gc" },
+			{ "gc", mode = "v" }
+		},
+	},
 }

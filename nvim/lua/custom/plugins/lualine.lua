@@ -6,7 +6,6 @@ return {
     opts = {
         options = {
             icons_enabled = true,
-            theme = 'PaperColor',
             component_separators = '',
             section_separators = '',
         },

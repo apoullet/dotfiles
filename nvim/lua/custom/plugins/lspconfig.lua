@@ -1,12 +1,13 @@
 return {
     {
         'neovim/nvim-lspconfig',
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufWritePre", "BufNewFile" },
         dependencies = {
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
             { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
             'folke/neodev.nvim',
+            'ionide/Ionide-vim',
         },
         config = function()
             local on_attach = function(client, bufnr)
@@ -29,44 +30,6 @@ return {
                 if not client.server_capabilities.documentFormattingProvider then
                     return
                 end
-
-                local format_is_enabled = true
-                vim.api.nvim_create_user_command('FormatToggle', function()
-                    format_is_enabled = not format_is_enabled
-                    print('Setting autoformatting to: ' .. tostring(format_is_enabled))
-                end, {})
-
-                local _augroups = {}
-                local get_augroup = function(client)
-                    if not _augroups[client.id] then
-                        local group_name = 'lsp-format-' .. client.name
-                        local id = vim.api.nvim_create_augroup(group_name, { clear = true })
-                        _augroups[client.id] = id
-                    end
-
-                    return _augroups[client.id]
-                end
-
-                if client.name == 'tsserver' then
-                    return
-                end
-
-                vim.api.nvim_create_autocmd('BufWritePre', {
-                    group = get_augroup(client),
-                    buffer = bufnr,
-                    callback = function()
-                        if not format_is_enabled then
-                            return
-                        end
-
-                        vim.lsp.buf.format {
-                            async = false,
-                            filter = function(c)
-                                return c.id == client.id
-                            end,
-                        }
-                    end,
-                })
             end
 
             -- Setup Neovim lua configuration
@@ -126,10 +89,8 @@ return {
                 mapping = cmp.mapping.preset.insert {
                     ['<C-n>'] = cmp.mapping.select_next_item(),
                     ['<C-p>'] = cmp.mapping.select_prev_item(),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
                     ['<C-Space>'] = cmp.mapping.complete {},
-                    ['<Tab>'] = cmp.mapping.confirm {
+                    ['<C-y>'] = cmp.mapping.confirm {
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true,
                     },
@@ -139,5 +100,5 @@ return {
                 }
             }
         end
-    }
+    },
 }

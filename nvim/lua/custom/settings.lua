@@ -3,7 +3,7 @@
 
 -- Color theme
 vim.o.background = 'dark'
-vim.cmd.colorscheme('rose-pine')
+vim.cmd.colorscheme('kanagawa-dragon')
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -60,4 +60,4 @@ vim.o.expandtab = true
 
 -- Show EOL char
 vim.o.list = true
-vim.o.listchars = 'eol:⮐'
+vim.o.listchars = 'eol:⮐,tab:»·'
