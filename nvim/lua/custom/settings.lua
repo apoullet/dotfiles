@@ -4,6 +4,7 @@
 -- Color theme
 vim.o.background = 'dark'
 vim.cmd.colorscheme('kanagawa-dragon')
+-- vim.api.nvim_set_hl(0, "Normal", {})
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -60,4 +61,4 @@ vim.o.expandtab = true
 
 -- Show EOL char
 vim.o.list = true
-vim.o.listchars = 'eol:⮐,tab:»·'
+vim.o.listchars = 'eol:↲,tab:»·'
