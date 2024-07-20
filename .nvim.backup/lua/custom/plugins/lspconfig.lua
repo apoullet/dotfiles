@@ -7,6 +7,7 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 			{ "j-hui/fidget.nvim", tag = "legacy", opts = {} },
 			"folke/neodev.nvim",
+			"ionide/Ionide-vim",
 		},
 		config = function()
 			local on_attach = function(client, bufnr)
@@ -71,7 +72,7 @@ return {
 	},
 	{
 		-- Autocompletion
-		"hrsh7th/nvim-cmp",
+		"hrs7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
 			-- Adds LSP completion capabilities

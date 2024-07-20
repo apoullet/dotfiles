@@ -4,8 +4,6 @@ return {
 		dependencies = {
 			"neovim/nvim-lspconfig",
 		},
-		-- event = { "BufReadPost", "BufWritePre", "BufNewFile" },
-		event = "VeryLazy",
 		opts = {
 			notify_on_error = false,
 			format_on_save = {

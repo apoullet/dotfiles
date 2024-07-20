@@ -3,7 +3,7 @@
 
 -- Color theme
 vim.o.background = "dark"
-vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("kanagawa-dragon")
 -- vim.api.nvim_set_hl(0, "Normal", {})
 
 -- Set highlight on search
