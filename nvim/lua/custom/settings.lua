@@ -3,7 +3,10 @@
 
 -- Color theme
 vim.o.background = "dark"
-vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("tokyonight-night")
+vim.g.moonflyItalics = false
+vim.cmd.colorscheme("moonfly")
 -- vim.api.nvim_set_hl(0, "Normal", {})
 
 -- Set highlight on search
