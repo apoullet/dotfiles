@@ -18,21 +18,24 @@ return {
 					vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 				end
 
-				nmap("<leader>rr", vim.lsp.buf.rename, "[R]e[n]ame")
+				local builtin = require("telescope.builtin")
 
-				nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-				nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-				nmap("gi", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-				nmap("<C-l>", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+				nmap("gd", builtin.lsp_definitions)
+				nmap("gD", function()
+					builtin.lsp_definitions({ jump_type = "split" })
+				end)
+				nmap("gr", builtin.lsp_references)
+				nmap("gi", builtin.lsp_implementations)
+				nmap("<C-l>", builtin.lsp_document_symbols)
 
-				nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+				nmap("K", vim.lsp.buf.hover)
 
 				vim.diagnostic.config({
 					virtual_text = false,
 				})
 				nmap("<C-k>", function()
 					vim.diagnostic.open_float(nil, { focus = false })
-				end, "Hover Diagnostics")
+				end)
 
 				if not client.server_capabilities.documentFormattingProvider then
 					return
@@ -44,9 +47,23 @@ return {
 
 			-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			local servers = {
+			local lspconfig = require("lspconfig")
+			lspconfig["zls"].setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					zls = {
+						path = "/usr/bin/zig",
+						zls = {
+							path = "/usr/bin/zls",
+						},
+					},
+				},
+			})
+
+			local mason_servers = {
 				lua_ls = {
 					Lua = {
 						telemetry = {
@@ -55,15 +72,14 @@ return {
 					},
 				},
 			}
-
-			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
+			require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(mason_servers) })
 			require("mason-lspconfig").setup_handlers({
 				function(server_name)
 					require("lspconfig")[server_name].setup({
 						capabilities = capabilities,
 						on_attach = on_attach,
-						settings = servers[server_name],
-						filetypes = (servers[server_name] or {}).filetypes,
+						settings = mason_servers[server_name],
+						filetypes = (mason_servers[server_name] or {}).filetypes,
 					})
 				end,
 			})
@@ -104,6 +120,9 @@ return {
 				}),
 				sources = {
 					{ name = "nvim_lsp" },
+				},
+				completion = {
+					autocomplete = false,
 				},
 			})
 		end,

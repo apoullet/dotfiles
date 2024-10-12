@@ -2,11 +2,15 @@
 -- See `:help vim.o`
 
 -- Color theme
-vim.o.background = "dark"
+-- vim.o.background = "dark"
+vim.o.background = "light"
+vim.cmd.colorscheme("PaperColorSlim")
+-- vim.cmd.colorscheme("quiet")
 -- vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("vague")
 -- vim.cmd.colorscheme("tokyonight-night")
-vim.g.moonflyItalics = false
-vim.cmd.colorscheme("moonfly")
+-- vim.g.moonflyItalics = false
+-- vim.cmd.colorscheme("moonfly")
 -- vim.api.nvim_set_hl(0, "Normal", {})
 
 -- Set highlight on search
@@ -50,6 +54,7 @@ vim.o.termguicolors = true
 
 -- Change cursor behavior in different modes
 vim.o.guicursor = "a:block-blinkon0,i-r:hor20"
+-- vim.o.guicursor = "a:block-blinkon0"
 
 -- Sane splitting behaviour
 vim.o.splitbelow = true

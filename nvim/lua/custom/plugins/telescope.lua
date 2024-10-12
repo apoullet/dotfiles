@@ -40,6 +40,8 @@ return {
 			vim.keymap.set("n", "<leader>sn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
 			end)
+			-- Shortcut for searching neovim documentation
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags)
 		end,
 	},
 	{
