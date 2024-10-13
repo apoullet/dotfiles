@@ -18,30 +18,29 @@ vim.keymap.set("n", "<A-l>", "<C-w>l")
 -- Sane window closing
 vim.keymap.set("t", "<C-t>", "<C-\\><C-N>:q<CR>")
 
-function string.starts_with(String, Start)
-	return string.sub(String, 1, string.len(Start)) == Start
-end
-
 -- Create or open the terminal window
 vim.keymap.set("n", "<C-t>", function()
 	local current_handle = vim.api.nvim_get_current_buf()
 	local current_buffer_name = vim.api.nvim_buf_get_name(current_handle)
-	if string.starts_with(current_buffer_name, "term:") then
+	if current_buffer_name:find("^term:") then
 		return
 	end
 
-	vim.cmd("split")
+	local bufinfos = vim.fn.getbufinfo({ bufloaded = 1 })
 
-	for _, handle in ipairs(vim.api.nvim_list_bufs()) do
-		if vim.api.nvim_buf_is_loaded(handle) then
-			local buffer_name = vim.api.nvim_buf_get_name(handle)
-			if string.starts_with(buffer_name, "term:") then
-				vim.api.nvim_set_current_buf(handle)
-				vim.api.nvim_feedkeys("i", "n", false)
-				return
+	for _, info in ipairs(bufinfos) do
+		if info.name:find("^term:") then
+			if info.hidden == 1 then
+				vim.cmd("split")
+				vim.api.nvim_set_current_buf(info.bufnr)
+			else
+				vim.cmd("wincmd j")
 			end
+
+			vim.api.nvim_feedkeys("i", "n", false)
+			return
 		end
 	end
 
-	vim.cmd("term")
+	vim.cmd("split | term")
 end)
