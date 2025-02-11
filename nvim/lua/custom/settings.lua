@@ -3,10 +3,8 @@
 
 -- Color theme
 -- vim.o.background = "dark"
-vim.o.background = "light"
-vim.cmd.colorscheme("PaperColorSlim")
 -- vim.cmd.colorscheme("quiet")
--- vim.cmd.colorscheme("habamax")
+vim.cmd.colorscheme("habamax")
 -- vim.cmd.colorscheme("vague")
 -- vim.cmd.colorscheme("tokyonight-night")
 -- vim.g.moonflyItalics = false
