@@ -31,7 +31,9 @@ return {
 				nmap("K", vim.lsp.buf.hover)
 
 				vim.diagnostic.config({
-					virtual_text = false,
+					virtual_text = true,
+					underline = true,
+					signs = false,
 				})
 				nmap("<C-k>", function()
 					vim.diagnostic.open_float(nil, { focus = false })
@@ -59,6 +61,19 @@ return {
 						path = "/usr/bin/zig",
 						zls = {
 							path = "/usr/bin/zls",
+						},
+					},
+				},
+			})
+
+			lspconfig["ocamllsp"].setup({
+				capabilities = capabilities,
+				on_attach = on_attach,
+				settings = {
+					ocamllsp = {
+						path = "$HOME/.opam/default/bin/ocamllsp",
+						ocamllsp = {
+							path = "$HOME/.opam/default/bin/ocamllsp",
 						},
 					},
 				},

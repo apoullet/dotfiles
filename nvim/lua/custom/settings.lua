@@ -67,4 +67,5 @@ vim.o.expandtab = true
 
 -- Show EOL char
 vim.o.list = true
-vim.o.listchars = "tab:  ,eol:↲"
+-- vim.o.listchars = "tab:  ,eol:↲"
+vim.o.listchars = "tab:  "
