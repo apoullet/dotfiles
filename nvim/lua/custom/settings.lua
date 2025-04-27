@@ -3,8 +3,14 @@
 
 -- Color theme
 -- vim.o.background = "dark"
+vim.o.background = "light"
+-- vim.cmd.colorscheme("gruvbox")
 -- vim.cmd.colorscheme("quiet")
-vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("kanagawa-dragon")
+vim.cmd.colorscheme("dayfox")
+-- vim.cmd.colorscheme("habamax")
+-- vim.cmd.colorscheme("lunaperche")
+-- vim.cmd.colorscheme("peachpuff")
 -- vim.cmd.colorscheme("vague")
 -- vim.cmd.colorscheme("tokyonight-night")
 -- vim.g.moonflyItalics = false
@@ -69,3 +75,9 @@ vim.o.expandtab = true
 vim.o.list = true
 -- vim.o.listchars = "tab:  ,eol:↲"
 vim.o.listchars = "tab:  "
+
+-- Use rounded borders on all floating windows
+-- vim.o.winborder = "rounded"
+
+-- Update the file automatically if it's been externally updated e.g. when doing inline snapshot testing
+vim.o.autoread = true

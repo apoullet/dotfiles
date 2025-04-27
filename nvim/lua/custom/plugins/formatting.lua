@@ -1,9 +1,6 @@
 return {
 	{
 		"stevearc/conform.nvim",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-		},
 		-- event = { "BufReadPost", "BufWritePre", "BufNewFile" },
 		event = "VeryLazy",
 		opts = {

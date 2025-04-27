@@ -1,8 +1,5 @@
 -- [[ Basic Keymaps ]]
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "[W]rite [b]uffer", silent = true })
 vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "[Q]uit" })
 

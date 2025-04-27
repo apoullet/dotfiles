@@ -1,2 +1,5 @@
-require('custom.settings')
-require('custom.autocmds')
+require("custom.keymaps")
+require("custom.terminal")
+require("custom.settings")
+require("custom.autocmds")
+require("custom.lspconfig")
