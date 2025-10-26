@@ -2,20 +2,8 @@
 -- See `:help vim.o`
 
 -- Color theme
--- vim.o.background = "dark"
-vim.o.background = "light"
--- vim.cmd.colorscheme("gruvbox")
--- vim.cmd.colorscheme("quiet")
--- vim.cmd.colorscheme("kanagawa-dragon")
-vim.cmd.colorscheme("dayfox")
--- vim.cmd.colorscheme("habamax")
--- vim.cmd.colorscheme("lunaperche")
--- vim.cmd.colorscheme("peachpuff")
--- vim.cmd.colorscheme("vague")
--- vim.cmd.colorscheme("tokyonight-night")
--- vim.g.moonflyItalics = false
--- vim.cmd.colorscheme("moonfly")
--- vim.api.nvim_set_hl(0, "Normal", {})
+vim.o.background = "dark"
+vim.cmd.colorscheme("habamax")
 
 -- Set highlight on search
 vim.o.hlsearch = false
