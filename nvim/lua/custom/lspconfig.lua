@@ -32,6 +32,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.enable({ "luals", "ocamllsp", "rust-analyzer", "janet-lsp" })
+vim.lsp.enable({ "luals", "ocamllsp", "rust-analyzer", "janet-lsp", "nixd", "pylsp" })
 
 require("fidget").setup({})

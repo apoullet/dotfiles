@@ -20,6 +20,8 @@ return {
 				go = { "gofmt" },
 				erlang = { "erlfmt" },
 				rust = { "rustfmt" },
+				nix = { "nixfmt" },
+				python = { "black" },
 			},
 			formatters = {
 				erlfmt = {
