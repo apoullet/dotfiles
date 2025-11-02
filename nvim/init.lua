@@ -1,5 +1,9 @@
+-- [[ Leader keys ]]
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- [[ Lazy.nvim bootstrap ]]
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -62,6 +66,10 @@ vim.keymap.set({ "t", "i", "n" }, "<A-j>", "<C-\\><C-N><C-w>j")
 vim.keymap.set({ "t", "i", "n" }, "<A-k>", "<C-\\><C-N><C-w>k")
 vim.keymap.set({ "t", "i", "n" }, "<A-l>", "<C-\\><C-N><C-w>l")
 
+-- Floating terminal configuration
+local TERMINAL_WIDTH_RATIO = 0.8
+local TERMINAL_HEIGHT_RATIO = 0.7
+
 local state = {
 	buf = -1,
 	win = -1,
@@ -69,12 +77,12 @@ local state = {
 
 local toggle_terminal = function()
 	-- Get the dimensions of the current window
-	local screen_width = vim.o.columns -- Total width of the screen
-	local screen_height = vim.o.lines -- Total height of the screen
+	local screen_width = vim.o.columns
+	local screen_height = vim.o.lines
 
-	-- Calculate the dimensions of the floating window (75% of the screen)
-	local width = math.floor(screen_width * 0.8)
-	local height = math.floor(screen_height * 0.7)
+	-- Calculate the dimensions of the floating window
+	local width = math.floor(screen_width * TERMINAL_WIDTH_RATIO)
+	local height = math.floor(screen_height * TERMINAL_HEIGHT_RATIO)
 
 	-- Calculate the position to center the window
 	local row = math.floor((screen_height - height - 4) / 2)
@@ -118,82 +126,52 @@ vim.keymap.set({ "t", "i", "n" }, "<C-t>", toggle_terminal)
 
 -- See `:help vim.o`
 
--- Color theme
+-- Appearance
 vim.o.background = "dark"
--- vim.cmd.colorscheme("habamax")
 vim.cmd.colorscheme("kanagawa-dragon")
+vim.o.termguicolors = true
+vim.o.guicursor = "a:block-blinkon0,i-r:hor20"
 
--- Settings to emulate Casey Muratori's scheme in Handmade Hero
--- vim.api.nvim_set_hl(0, "Normal", { fg = "#BFAD9C", bg = "#130D07" })
--- vim.api.nvim_set_hl(0, "Identifier", { fg = "#BFAD9C" })
--- vim.api.nvim_set_hl(0, "Function", { fg = "#BFAD9C" })
-
--- vim.o.cursorline = true
--- vim.api.nvim_set_hl(0, "CursorLine", { fg = "#BFAD9C", bg = "#000088" })
-
--- Set highlight on search
-vim.o.hlsearch = false
-vim.o.incsearch = true
-
--- Make line numbers default
+-- Line numbers
 vim.wo.number = true
 vim.wo.relativenumber = true
+vim.wo.signcolumn = "yes"
 
--- Enable mouse mode
-vim.o.mouse = "a"
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = "unnamedplus"
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or capital in search
+-- Search
+vim.o.hlsearch = false
+vim.o.incsearch = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = "yes"
+-- Editing behavior
+vim.o.mouse = "a"
+vim.o.clipboard = "unnamedplus"
+vim.o.breakindent = true
+vim.o.undofile = true
 
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
--- Change cursor behavior in different modes
-vim.o.guicursor = "a:block-blinkon0,i-r:hor20"
--- vim.o.guicursor = "a:block-blinkon0"
-
--- Sane splitting behaviour
-vim.o.splitbelow = true
-vim.o.splitright = true
-
--- Tabbing behaviour
+-- Indentation and tabs
 vim.o.autoindent = true
 vim.o.smartindent = true
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
 
--- Show EOL char
+-- Visual helpers
 vim.o.list = true
--- vim.o.listchars = "tab:  ,eol:↲"
 vim.o.listchars = "tab:  "
 
--- Use rounded borders on all floating windows
--- vim.o.winborder = "rounded"
+-- Performance
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
 
--- Update the file automatically if it's been externally updated e.g. when doing inline snapshot testing
+-- Completion
+vim.o.completeopt = "menuone,noselect"
+
+-- Splits
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+-- File handling
 vim.o.autoread = true
 
 -- [[ Autocmds ]]
