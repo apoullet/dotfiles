@@ -5,7 +5,7 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
 		config = function()
 			require("telescope").setup({
-				defaults = {
+				defaults = require("telescope.themes").get_ivy({
 					mappings = {
 						i = {
 							["<C-u>"] = false,
@@ -19,7 +19,9 @@ return {
 							["<C-P>"] = "move_selection_previous",
 						},
 					},
-				},
+					prompt_prefix = "Search: ",
+					selection_caret = "* ",
+				}),
 			})
 
 			-- Enable telesope fzf native, if installed
