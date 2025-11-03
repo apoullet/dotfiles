@@ -1,88 +1,66 @@
--- [[ Leader keys ]]
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- [[ Lazy.nvim bootstrap ]]
-
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
-	})
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup("custom.plugins", {
-	performance = {
-		rtp = {
-			disabled_plugins = {
-				"gzip",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
-				"spellfile",
-			},
-		},
-	},
-})
-
--- [[ Basic Keymaps ]]
-
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "[W]rite [b]uffer", silent = true })
-vim.keymap.set("n", "<leader>q", "<cmd>q<cr>", { desc = "[Q]uit" })
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Diagnostic keymaps
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>q<cr>")
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("n", "[d", function()
 	vim.diagnostic.jump({ count = -1, float = true })
 end)
 vim.keymap.set("n", "]d", function()
 	vim.diagnostic.jump({ count = 1, float = true })
 end)
-vim.keymap.set("n", "<leader>od", vim.diagnostic.setloclist)
 
--- [[ VIM terminal setup ]]
+vim.o.termguicolors = true
+vim.o.guicursor = "a:block-blinkon0,i-r:hor20"
 
--- Remap to be able to use the VIM integrated terminal sanely
+vim.wo.number = true
+vim.wo.relativenumber = true
+vim.wo.signcolumn = "yes"
+
+vim.o.hlsearch = false
+vim.o.incsearch = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+vim.o.mouse = "a"
+vim.o.clipboard = "unnamedplus"
+vim.o.breakindent = true
+vim.o.undofile = true
+
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
+
+vim.o.list = true
+vim.o.listchars = "tab:  "
+
+vim.o.updatetime = 250
+vim.o.timeoutlen = 300
+
+vim.o.completeopt = "menuone,noselect"
+
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+vim.o.autoread = true
+
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-
--- Remap to move windows more easily in any mode
-vim.keymap.set({ "t", "i", "n" }, "<A-h>", "<C-\\><C-N><C-w>h")
-vim.keymap.set({ "t", "i", "n" }, "<A-j>", "<C-\\><C-N><C-w>j")
-vim.keymap.set({ "t", "i", "n" }, "<A-k>", "<C-\\><C-N><C-w>k")
-vim.keymap.set({ "t", "i", "n" }, "<A-l>", "<C-\\><C-N><C-w>l")
-
--- Floating terminal configuration
-local TERMINAL_WIDTH_RATIO = 0.8
-local TERMINAL_HEIGHT_RATIO = 0.7
 
 local state = {
 	buf = -1,
 	win = -1,
 }
 
-local toggle_terminal = function()
-	-- Get the dimensions of the current window
+vim.keymap.set({ "t", "i", "n" }, "<C-t>", function()
 	local screen_width = vim.o.columns
 	local screen_height = vim.o.lines
 
-	-- Calculate the dimensions of the floating window
-	local width = math.floor(screen_width * TERMINAL_WIDTH_RATIO)
-	local height = math.floor(screen_height * TERMINAL_HEIGHT_RATIO)
+	local width = math.floor(screen_width * 0.8)
+	local height = math.floor(screen_height * 0.7)
 
 	-- Calculate the position to center the window
 	local row = math.floor((screen_height - height - 4) / 2)
@@ -117,77 +95,8 @@ local toggle_terminal = function()
 	else
 		vim.api.nvim_win_hide(state.win)
 	end
-end
+end)
 
--- Sane terminal handling
-vim.keymap.set({ "t", "i", "n" }, "<C-t>", toggle_terminal)
-
--- [[ Setting options ]]
-
--- See `:help vim.o`
-
--- Appearance
-vim.o.background = "dark"
-vim.cmd.colorscheme("kanagawa-dragon")
-vim.o.termguicolors = true
-vim.o.guicursor = "a:block-blinkon0,i-r:hor20"
-
--- Line numbers
-vim.wo.number = true
-vim.wo.relativenumber = true
-vim.wo.signcolumn = "yes"
-
--- Search
-vim.o.hlsearch = false
-vim.o.incsearch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Editing behavior
-vim.o.mouse = "a"
-vim.o.clipboard = "unnamedplus"
-vim.o.breakindent = true
-vim.o.undofile = true
-
--- Indentation and tabs
-vim.o.autoindent = true
-vim.o.smartindent = true
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
-vim.o.expandtab = true
-
--- Visual helpers
-vim.o.list = true
-vim.o.listchars = "tab:  "
-
--- Performance
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-
--- Completion
-vim.o.completeopt = "menuone,noselect"
-
--- Splits
-vim.o.splitbelow = true
-vim.o.splitright = true
-
--- File handling
-vim.o.autoread = true
-
--- [[ Autocmds ]]
-
--- Highlight on yank
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
-})
-
--- Terminal
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "",
 	command = "startinsert",
@@ -201,7 +110,135 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	command = "checktime",
 })
 
--- [[ LSP config ]]
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+	{
+		{
+			"typicode/bg.nvim",
+		},
+		{
+			"rebelot/kanagawa.nvim",
+			lazy = false,
+			priority = 1000,
+			opts = {},
+		},
+		{
+			"nvim-telescope/telescope.nvim",
+			event = "VeryLazy",
+			dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-fzf-native.nvim" },
+		},
+		{
+			"nvim-telescope/telescope-fzf-native.nvim",
+			lazy = true,
+			build = "make",
+			cond = function()
+				return vim.fn.executable("make") == 1
+			end,
+		},
+		{
+			"j-hui/fidget.nvim",
+			tag = "v1.6.1",
+			opts = {},
+		},
+		{
+			"stevearc/conform.nvim",
+			event = "VeryLazy",
+		},
+		{
+			"tpope/vim-commentary",
+			keys = {
+				{ "gc" },
+				{ "gc", mode = "v" },
+			},
+		},
+		{
+			"tpope/vim-surround",
+			keys = {
+				"cs",
+				"ds",
+			},
+			dependencies = {
+				"tpope/vim-repeat",
+			},
+		},
+		{
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
+			config = true,
+		},
+	},
+}, {
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"spellfile",
+			},
+		},
+	},
+})
+
+vim.o.background = "dark"
+vim.cmd.colorscheme("kanagawa-dragon")
+
+require("telescope").setup({
+	defaults = require("telescope.themes").get_ivy({
+		mappings = {
+			i = {
+				["<C-u>"] = false,
+				["<C-d>"] = false,
+			},
+			n = {
+
+				["j"] = false,
+				["k"] = false,
+				["<C-N>"] = "move_selection_next",
+				["<C-P>"] = "move_selection_previous",
+			},
+		},
+		prompt_prefix = "Search: ",
+		selection_caret = "* ",
+	}),
+})
+
+pcall(require("telescope").load_extension, "fzf")
+
+local builtin = require("telescope.builtin")
+
+vim.keymap.set("n", "<leader>?", builtin.oldfiles)
+vim.keymap.set("n", "<leader>gf", builtin.git_files)
+vim.keymap.set("n", "<C-h>", builtin.find_files)
+vim.keymap.set("n", "<leader>sg", builtin.live_grep)
+vim.keymap.set("v", "<leader>sg", builtin.grep_string)
+vim.keymap.set("n", "<leader>sn", function()
+	builtin.find_files({ cwd = vim.fn.stdpath("config") })
+end)
+vim.keymap.set("n", "<leader>sh", builtin.help_tags)
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(e)
@@ -239,4 +276,27 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.lsp.enable({ "luals", "ocamllsp", "rust-analyzer", "janet-lsp", "nixd", "pylsp" })
 
-require("fidget").setup({})
+require("conform").setup({
+	notify_on_error = false,
+	format_on_save = {
+		timeout_ms = 500,
+		lsp_fallback = false,
+	},
+	formatters_by_ft = {
+		lua = { "stylua" },
+		go = { "gofmt" },
+		erlang = { "erlfmt" },
+		rust = { "rustfmt" },
+		nix = { "nixfmt" },
+		python = { "black" },
+	},
+	formatters = {
+		erlfmt = {
+			command = "rebar3",
+			args = { "fmt", "-" },
+			condition = function()
+				return next(vim.fs.find("rebar.config", { upward = true, stop = "/home/apoullet" })) ~= nil
+			end,
+		},
+	},
+})
