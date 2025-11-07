@@ -162,10 +162,6 @@ require("lazy").setup({
             opts = {},
         },
         {
-            "stevearc/conform.nvim",
-            event = "VeryLazy",
-        },
-        {
             "tpope/vim-commentary",
             keys = {
                 { "gc" },
