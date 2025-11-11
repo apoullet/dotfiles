@@ -141,7 +141,7 @@ require("lazy").setup({
             "rebelot/kanagawa.nvim",
             lazy = false,
             priority = 1000,
-            opts = {},
+            opts = { colors = { theme = { all = { ui = { bg_gutter = "none" } } } } },
         },
         {
             "nvim-telescope/telescope.nvim",
@@ -231,9 +231,6 @@ vim.keymap.set("n", "<leader>gf", builtin.git_files)
 vim.keymap.set("n", "<C-h>", builtin.find_files)
 vim.keymap.set("n", "<leader>sg", builtin.live_grep)
 vim.keymap.set("v", "<leader>sg", builtin.grep_string)
-vim.keymap.set("n", "<leader>sn", function()
-    builtin.find_files({ cwd = vim.fn.stdpath("config") })
-end)
 vim.keymap.set("n", "<leader>sh", builtin.help_tags)
 
 vim.lsp.config['luals'] = {
