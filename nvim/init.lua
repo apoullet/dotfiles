@@ -138,10 +138,15 @@ require("lazy").setup({
             "typicode/bg.nvim",
         },
         {
-            "rebelot/kanagawa.nvim",
-            lazy = false,
+            "ellisonleao/gruvbox.nvim",
             priority = 1000,
-            opts = { colors = { theme = { all = { ui = { bg_gutter = "none" } } } } },
+            config = true,
+            opts = {
+                contrast = "hard",
+                overrides = {
+                    SignColumn = { bg = "none" }
+                }
+            }
         },
         {
             "nvim-telescope/telescope.nvim",
@@ -156,51 +161,29 @@ require("lazy").setup({
                 return vim.fn.executable("make") == 1
             end,
         },
-        {
-            "j-hui/fidget.nvim",
-            tag = "v1.6.1",
-            opts = {},
-        },
+        { "j-hui/fidget.nvim",               tag = "v1.6.1",        opts = {}, },
         {
             "tpope/vim-commentary",
-            keys = {
-                { "gc" },
-                { "gc", mode = "v" },
-            },
+            keys = { { "gc" }, { "gc", mode = "v" }, },
         },
         {
             "tpope/vim-surround",
-            keys = {
-                "cs",
-                "ds",
-            },
-            dependencies = {
-                "tpope/vim-repeat",
-            },
+            keys = { "cs", "ds", },
+            dependencies = { "tpope/vim-repeat", },
         },
-        {
-            "windwp/nvim-autopairs",
-            event = "InsertEnter",
-            config = true,
-        },
+        { "windwp/nvim-autopairs",           event = "InsertEnter", config = true, },
+        { "nvim-treesitter/nvim-treesitter", branch = 'master',     lazy = false,  build = ":TSUpdate" }
     },
 }, {
     performance = {
         rtp = {
-            disabled_plugins = {
-                "gzip",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-                "spellfile",
-            },
+            disabled_plugins = { "gzip", "tarPlugin", "tohtml", "tutor", "zipPlugin", "spellfile", },
         },
     },
 })
 
 vim.o.background = "dark"
-vim.cmd.colorscheme("kanagawa-dragon")
+vim.cmd.colorscheme("gruvbox")
 
 require("telescope").setup({
     defaults = require("telescope.themes").get_ivy({
@@ -210,7 +193,6 @@ require("telescope").setup({
                 ["<C-d>"] = false,
             },
             n = {
-
                 ["j"] = false,
                 ["k"] = false,
                 ["<C-N>"] = "move_selection_next",
@@ -223,11 +205,7 @@ require("telescope").setup({
 })
 
 pcall(require("telescope").load_extension, "fzf")
-
 local builtin = require("telescope.builtin")
-
-vim.keymap.set("n", "<leader>?", builtin.oldfiles)
-vim.keymap.set("n", "<leader>gf", builtin.git_files)
 vim.keymap.set("n", "<C-h>", builtin.find_files)
 vim.keymap.set("n", "<leader>sg", builtin.live_grep)
 vim.keymap.set("v", "<leader>sg", builtin.grep_string)
@@ -312,4 +290,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
             })
         end
     end,
+})
+
+require("nvim-treesitter.configs").setup({
+    ensure_installed = { "lua", "rust", "c_sharp", "nix" },
+    highlight = { enable = true }
 })
